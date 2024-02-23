@@ -40,7 +40,7 @@ async function formatVersion3(options: FormatOptions): Promise<boolean> {
   const dotnetFormatOptions = ["format", "--check"];
 
   if (options.dryRun) {
-    dotnetFormatOptions.push("--dry-run");
+    dotnetFormatOptions.push("--check");
   }
 
   if (formatOnlyChangedFiles(options.onlyChangedFiles)) {
@@ -54,7 +54,7 @@ async function formatVersion3(options: FormatOptions): Promise<boolean> {
       return false;
     }
 
-    dotnetFormatOptions.push("--files", filesToCheck.join(","));
+    dotnetFormatOptions.push("--include", filesToCheck.join(","));
   }
 
   const dotnetPath: string = await which("dotnet", true);
